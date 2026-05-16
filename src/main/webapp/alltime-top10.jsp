@@ -199,6 +199,27 @@
             color: #FFD700;
         }
         
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-card i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: #FFD700;
+        }
+        
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -215,16 +236,143 @@
             opacity: 0;
         }
         
-        .anime-card:nth-child(1) { animation-delay: 0.1s; }
-        .anime-card:nth-child(2) { animation-delay: 0.2s; }
-        .anime-card:nth-child(3) { animation-delay: 0.3s; }
-        .anime-card:nth-child(4) { animation-delay: 0.4s; }
-        .anime-card:nth-child(5) { animation-delay: 0.5s; }
-        .anime-card:nth-child(6) { animation-delay: 0.6s; }
-        .anime-card:nth-child(7) { animation-delay: 0.7s; }
-        .anime-card:nth-child(8) { animation-delay: 0.8s; }
-        .anime-card:nth-child(9) { animation-delay: 0.9s; }
-        .anime-card:nth-child(10) { animation-delay: 1s; }
+        .navbar {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #FFD700, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 0.8rem;
+            color: #FF6B35;
+            display: block;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #f5f5f5;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: #FF6B35;
+        }
+        
+        .search-bar {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .search-bar input {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 25px;
+            background: #2d2d44;
+            color: white;
+        }
+        
+        .search-bar button {
+            padding: 0.5rem 1rem;
+            background: #FF6B35;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        footer {
+            background: #0f0f1a;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            color: #f5f5f5;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: #FF6B35;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #2d2d44;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .anime-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -252,7 +400,7 @@
             <div class="page-header">
                 <h1><i class="fas fa-crown"></i> All-Time Top 10 Anime</h1>
                 <p>The greatest anime masterpieces of all time, ranked by fans worldwide</p>
-                <div class="stats-bar" style="margin-top: 2rem;">
+                <div class="stats-bar">
                     <div class="stat-card">
                         <i class="fas fa-chart-line"></i>
                         <span>10</span> Legendary Series
@@ -306,193 +454,67 @@
     </footer>
 
     <script>
-        // All-Time Top 10 Anime Data with Images and Details
-        const allTimeAnime = [
-            {
-                rank: 1,
-                title: "Cowboy Bebop",
-                year: "1998",
-                rating: 9.5,
-                reviews: 125000,
-                genre: ["Action", "Sci-Fi", "Space Western"],
-                image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400",
-                description: "The classic space western following bounty hunter Spike Spiegel and his crew aboard the Bebop spaceship.",
-                episodes: 26,
-                studio: "Sunrise"
-            },
-            {
-                rank: 2,
-                title: "Death Note",
-                year: "2006",
-                rating: 9.4,
-                reviews: 234000,
-                genre: ["Psychological", "Thriller", "Supernatural"],
-                image: "https://images.unsplash.com/photo-1580428182138-9b80fa2a83b9?w=400",
-                description: "A genius high school student gains the power to kill anyone by writing their name in a supernatural notebook.",
-                episodes: 37,
-                studio: "Madhouse"
-            },
-            {
-                rank: 3,
-                title: "Fullmetal Alchemist: Brotherhood",
-                year: "2009",
-                rating: 9.8,
-                reviews: 345000,
-                genre: ["Action", "Adventure", "Fantasy"],
-                image: "https://images.unsplash.com/photo-1560972550-aba3456b5564?w=400",
-                description: "Two brothers use alchemy to search for the Philosopher's Stone to restore their bodies after a failed transmutation.",
-                episodes: 64,
-                studio: "Bones"
-            },
-            {
-                rank: 4,
-                title: "Neon Genesis Evangelion",
-                year: "1995",
-                rating: 9.2,
-                reviews: 189000,
-                genre: ["Mecha", "Psychological", "Action"],
-                image: "https://images.unsplash.com/photo-1541562232579-426a1ccf7b3c?w=400",
-                description: "Teenage pilots are recruited to fight mysterious monsters called Angels in giant mechs called Evangelions.",
-                episodes: 26,
-                studio: "Gainax"
-            },
-            {
-                rank: 5,
-                title: "One Punch Man",
-                year: "2015",
-                rating: 9.3,
-                reviews: 278000,
-                genre: ["Action", "Comedy", "Superhero"],
-                image: "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=400",
-                description: "A hero who can defeat any enemy with a single punch struggles with the boredom of his overwhelming power.",
-                episodes: 24,
-                studio: "Madhouse"
-            },
-            {
-                rank: 6,
-                title: "Sailor Moon",
-                year: "1992",
-                rating: 9.1,
-                reviews: 156000,
-                genre: ["Magical Girl", "Action", "Romance"],
-                image: "https://images.unsplash.com/photo-1569317002804-ab77bcf1bce4?w=400",
-                description: "A teenage girl discovers she is the reincarnation of a magical princess destined to save Earth from evil forces.",
-                episodes: 200,
-                studio: "Toei Animation"
-            },
-            {
-                rank: 7,
-                title: "Attack on Titan",
-                year: "2013",
-                rating: 9.7,
-                reviews: 412000,
-                genre: ["Dark Fantasy", "Action", "Post-Apocalyptic"],
-                image: "https://images.unsplash.com/photo-1580428182138-9b80fa2a83b9?w=400",
-                description: "Humanity fights for survival against giant humanoid creatures called Titans.",
-                episodes: 87,
-                studio: "WIT Studio / MAPPA"
-            },
-            {
-                rank: 8,
-                title: "Spirited Away",
-                year: "2001",
-                rating: 9.6,
-                reviews: 298000,
-                genre: ["Fantasy", "Adventure", "Family"],
-                image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400",
-                description: "A young girl gets trapped in a mysterious spirit world and must work at a bathhouse to free her parents.",
-                episodes: 1 (Movie),
-                studio: "Studio Ghibli"
-            },
-            {
-                rank: 9,
-                title: "Steins;Gate",
-                year: "2011",
-                rating: 9.4,
-                reviews: 167000,
-                genre: ["Sci-Fi", "Thriller", "Psychological"],
-                image: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=400",
-                description: "A self-proclaimed mad scientist discovers time travel and must deal with its dangerous consequences.",
-                episodes: 24,
-                studio: "White Fox"
-            },
-            {
-                rank: 10,
-                title: "The Melancholy of Haruhi Suzumiya",
-                year: "2006",
-                rating: 8.9,
-                reviews: 123000,
-                genre: ["Comedy", "Sci-Fi", "Slice of Life"],
-                image: "https://images.unsplash.com/photo-1631175419962-a9ed1c6742bf?w=400",
-                description: "A high school boy discovers that his eccentric classmate may have the power to alter reality.",
-                episodes: 28,
-                studio: "Kyoto Animation"
-            }
+        // All-Time Top 10 Anime Data
+        var allTimeAnime = [
+            { rank: 1, title: "Cowboy Bebop", year: "1998", rating: 9.5, reviews: 125000, genre: ["Action", "Sci-Fi", "Space Western"], image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400", description: "The classic space western following bounty hunter Spike Spiegel and his crew aboard the Bebop spaceship.", episodes: 26, studio: "Sunrise" },
+            { rank: 2, title: "Death Note", year: "2006", rating: 9.4, reviews: 234000, genre: ["Psychological", "Thriller", "Supernatural"], image: "https://images.unsplash.com/photo-1580428182138-9b80fa2a83b9?w=400", description: "A genius high school student gains the power to kill anyone by writing their name in a supernatural notebook.", episodes: 37, studio: "Madhouse" },
+            { rank: 3, title: "Fullmetal Alchemist: Brotherhood", year: "2009", rating: 9.8, reviews: 345000, genre: ["Action", "Adventure", "Fantasy"], image: "https://images.unsplash.com/photo-1560972550-aba3456b5564?w=400", description: "Two brothers use alchemy to search for the Philosopher's Stone to restore their bodies.", episodes: 64, studio: "Bones" },
+            { rank: 4, title: "Neon Genesis Evangelion", year: "1995", rating: 9.2, reviews: 189000, genre: ["Mecha", "Psychological", "Action"], image: "https://images.unsplash.com/photo-1541562232579-426a1ccf7b3c?w=400", description: "Teenage pilots fight mysterious monsters called Angels in giant mechs called Evangelions.", episodes: 26, studio: "Gainax" },
+            { rank: 5, title: "One Punch Man", year: "2015", rating: 9.3, reviews: 278000, genre: ["Action", "Comedy", "Superhero"], image: "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=400", description: "A hero who can defeat any enemy with a single punch struggles with boredom.", episodes: 24, studio: "Madhouse" },
+            { rank: 6, title: "Sailor Moon", year: "1992", rating: 9.1, reviews: 156000, genre: ["Magical Girl", "Action", "Romance"], image: "https://images.unsplash.com/photo-1569317002804-ab77bcf1bce4?w=400", description: "A teenage girl discovers she is the reincarnation of a magical princess.", episodes: 200, studio: "Toei Animation" },
+            { rank: 7, title: "Attack on Titan", year: "2013", rating: 9.7, reviews: 412000, genre: ["Dark Fantasy", "Action", "Post-Apocalyptic"], image: "https://images.unsplash.com/photo-1580428182138-9b80fa2a83b9?w=400", description: "Humanity fights for survival against giant humanoid creatures called Titans.", episodes: 87, studio: "WIT Studio / MAPPA" },
+            { rank: 8, title: "Spirited Away", year: "2001", rating: 9.6, reviews: 298000, genre: ["Fantasy", "Adventure", "Family"], image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400", description: "A young girl gets trapped in a mysterious spirit world.", episodes: 1, studio: "Studio Ghibli" },
+            { rank: 9, title: "Steins;Gate", year: "2011", rating: 9.4, reviews: 167000, genre: ["Sci-Fi", "Thriller", "Psychological"], image: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=400", description: "A self-proclaimed mad scientist discovers time travel.", episodes: 24, studio: "White Fox" },
+            { rank: 10, title: "The Melancholy of Haruhi Suzumiya", year: "2006", rating: 8.9, reviews: 123000, genre: ["Comedy", "Sci-Fi", "Slice of Life"], image: "https://images.unsplash.com/photo-1631175419962-a9ed1c6742bf?w=400", description: "A high school boy discovers his eccentric classmate may have the power to alter reality.", episodes: 28, studio: "Kyoto Animation" }
         ];
 
-        // Render anime cards
-        function renderAnime() {
-            const container = document.getElementById('animeGrid');
-            if (!container) return;
-            
-            let html = '';
-            for (let i = 0; i < allTimeAnime.length; i++) {
-                const anime = allTimeAnime[i];
-                const ratingStars = getRatingStars(anime.rating);
-                
-                html += `
-                    <div class="anime-card" onclick="watchAnime('${anime.title}')">
-                        <div class="anime-poster-container">
-                            <div class="rank-badge">#${anime.rank}</div>
-                            <img src="${anime.image}" alt="${anime.title}" class="anime-poster" onerror="this.src='https://via.placeholder.com/400x400?text=${encodeURIComponent(anime.title)}'">
-                            <div class="play-overlay">
-                                <i class="fas fa-play"></i>
-                            </div>
-                        </div>
-                        <div class="anime-info">
-                            <div class="anime-title">
-                                <span>${anime.title}</span>
-                                <span class="anime-year">${anime.year}</span>
-                            </div>
-                            <div class="rating">
-                                ${ratingStars}
-                                <span style="color: #ccc; margin-left: 5px;">(${anime.reviews.toLocaleString()} reviews)</span>
-                            </div>
-                            <div class="genre-tags">
-                                ${anime.genre.map(g => `<span class="genre-tag">${g}</span>`).join('')}
-                            </div>
-                            <p style="font-size: 0.85rem; color: #aaa; margin: 0.5rem 0;">${anime.description.substring(0, 100)}...</p>
-                            <div class="stats-row">
-                                <div class="stat-item">
-                                    <i class="fas fa-tv"></i>
-                                    <span>${anime.episodes} eps</span>
-                                </div>
-                                <div class="stat-item">
-                                    <i class="fas fa-building"></i>
-                                    <span>${anime.studio}</span>
-                                </div>
-                            </div>
-                            <button class="watch-btn" onclick="event.stopPropagation(); watchAnime('${anime.title}')">
-                                <i class="fas fa-play"></i> Watch Now
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-            container.innerHTML = html;
-        }
-
         function getRatingStars(rating) {
-            let stars = '';
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = (rating % 1) >= 0.5;
+            var stars = '';
+            var fullStars = Math.floor(rating);
+            var hasHalfStar = (rating % 1) >= 0.5;
             
-            for (let i = 0; i < fullStars; i++) stars += '<i class="fas fa-star"></i>';
+            for (var i = 0; i < fullStars; i++) stars += '<i class="fas fa-star"></i>';
             if (hasHalfStar) stars += '<i class="fas fa-star-half-alt"></i>';
-            const emptyStars = 5 - Math.ceil(rating);
-            for (let i = 0; i < emptyStars; i++) stars += '<i class="far fa-star"></i>';
+            var emptyStars = 5 - Math.ceil(rating);
+            for (var i = 0; i < emptyStars; i++) stars += '<i class="far fa-star"></i>';
             
             return stars;
+        }
+
+        function renderAnime(animeList) {
+            var container = document.getElementById('animeGrid');
+            if (!container) return;
+            
+            var html = '';
+            for (var i = 0; i < animeList.length; i++) {
+                var anime = animeList[i];
+                var ratingStars = getRatingStars(anime.rating);
+                
+                // Build genre tags
+                var genreHtml = '';
+                for (var g = 0; g < anime.genre.length; g++) {
+                    genreHtml += '<span class="genre-tag">' + anime.genre[g] + '</span>';
+                }
+                
+                html += '<div class="anime-card" onclick="watchAnime(\'' + anime.title.replace(/'/g, "\\'") + '\')">';
+                html += '<div class="anime-poster-container">';
+                html += '<div class="rank-badge">#' + anime.rank + '</div>';
+                html += '<img src="' + anime.image + '" alt="' + anime.title + '" class="anime-poster" onerror="this.src=\'https://via.placeholder.com/400x400?text=' + encodeURIComponent(anime.title) + '\'">';
+                html += '<div class="play-overlay"><i class="fas fa-play"></i></div>';
+                html += '</div>';
+                html += '<div class="anime-info">';
+                html += '<div class="anime-title"><span>' + anime.title + '</span><span class="anime-year">' + anime.year + '</span></div>';
+                html += '<div class="rating">' + ratingStars + '<span style="color: #ccc; margin-left: 5px;">(' + anime.reviews.toLocaleString() + ' reviews)</span></div>';
+                html += '<div class="genre-tags">' + genreHtml + '</div>';
+                html += '<p style="font-size: 0.85rem; color: #aaa; margin: 0.5rem 0;">' + anime.description.substring(0, 100) + '...</p>';
+                html += '<div class="stats-row">';
+                html += '<div class="stat-item"><i class="fas fa-tv"></i><span>' + anime.episodes + ' eps</span></div>';
+                html += '<div class="stat-item"><i class="fas fa-building"></i><span>' + anime.studio + '</span></div>';
+                html += '</div>';
+                html += '<button class="watch-btn" onclick="event.stopPropagation(); watchAnime(\'' + anime.title.replace(/'/g, "\\'") + '\')"><i class="fas fa-play"></i> Watch Now</button>';
+                html += '</div></div>';
+            }
+            container.innerHTML = html;
         }
 
         function watchAnime(title) {
@@ -500,92 +522,42 @@
             window.location.href = 'watch.jsp';
         }
 
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                background: #FF6B35;
-                color: white;
-                padding: 1rem 2rem;
-                border-radius: 50px;
-                z-index: 10000;
-                animation: slideIn 0.3s ease;
-            `;
-            notification.innerHTML = `<i class="fas fa-info-circle"></i> ${message}`;
-            document.body.appendChild(notification);
-            setTimeout(() => notification.remove(), 3000);
-        }
-
-        // Search functionality
+        // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
-            renderAnime();
+            renderAnime(allTimeAnime);
             
-            const searchInput = document.getElementById('searchInput');
+            var searchInput = document.getElementById('searchInput');
             if (searchInput) {
                 searchInput.addEventListener('input', function(e) {
-                    const query = e.target.value.toLowerCase();
-                    const filtered = allTimeAnime.filter(anime => 
-                        anime.title.toLowerCase().includes(query) ||
-                        anime.genre.some(g => g.toLowerCase().includes(query))
-                    );
+                    var query = e.target.value.toLowerCase();
+                    var filtered = [];
                     
-                    const container = document.getElementById('animeGrid');
-                    if (query.length > 0) {
-                        if (filtered.length === 0) {
-                            container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 4rem;"><i class="fas fa-search" style="font-size: 3rem; color: #FF6B35;"></i><h3>No results found for "' + query + '"</h3></div>';
-                        } else {
-                            // Re-render filtered results
-                            let html = '';
-                            for (let i = 0; i < filtered.length; i++) {
-                                const anime = filtered[i];
-                                const ratingStars = getRatingStars(anime.rating);
-                                html += `
-                                    <div class="anime-card" onclick="watchAnime('${anime.title}')">
-                                        <div class="anime-poster-container">
-                                            <div class="rank-badge">#${anime.rank}</div>
-                                            <img src="${anime.image}" alt="${anime.title}" class="anime-poster" onerror="this.src='https://via.placeholder.com/400x400?text=${encodeURIComponent(anime.title)}'">
-                                            <div class="play-overlay">
-                                                <i class="fas fa-play"></i>
-                                            </div>
-                                        </div>
-                                        <div class="anime-info">
-                                            <div class="anime-title">
-                                                <span>${anime.title}</span>
-                                                <span class="anime-year">${anime.year}</span>
-                                            </div>
-                                            <div class="rating">${ratingStars}<span style="color: #ccc;"> (${anime.reviews.toLocaleString()} reviews)</span></div>
-                                            <div class="genre-tags">${anime.genre.map(g => `<span class="genre-tag">${g}</span>`).join('')}</div>
-                                            <button class="watch-btn" onclick="event.stopPropagation(); watchAnime('${anime.title}')"><i class="fas fa-play"></i> Watch Now</button>
-                                        </div>
-                                    </div>
-                                `;
+                    for (var i = 0; i < allTimeAnime.length; i++) {
+                        var anime = allTimeAnime[i];
+                        var titleMatch = anime.title.toLowerCase().indexOf(query) !== -1;
+                        var genreMatch = false;
+                        for (var g = 0; g < anime.genre.length; g++) {
+                            if (anime.genre[g].toLowerCase().indexOf(query) !== -1) {
+                                genreMatch = true;
+                                break;
                             }
-                            container.innerHTML = html;
                         }
+                        if (titleMatch || genreMatch) {
+                            filtered.push(anime);
+                        }
+                    }
+                    
+                    if (query.length > 0 && filtered.length === 0) {
+                        var container = document.getElementById('animeGrid');
+                        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 4rem;"><i class="fas fa-search" style="font-size: 3rem; color: #FF6B35;"></i><h3>No results found for "' + query + '"</h3></div>';
+                    } else if (query.length > 0) {
+                        renderAnime(filtered);
                     } else {
-                        renderAnime();
+                        renderAnime(allTimeAnime);
                     }
                 });
             }
         });
-
-        // Add animation style
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideIn {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 </body>
 </html>

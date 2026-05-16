@@ -103,11 +103,6 @@
             z-index: 2;
         }
         
-        .trending-icon i {
-            color: #FF4444;
-            margin-right: 5px;
-        }
-        
         .play-overlay {
             position: absolute;
             top: 50%;
@@ -143,14 +138,6 @@
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
-        }
-        
-        .anime-details {
-            display: flex;
-            gap: 1rem;
-            margin: 0.5rem 0;
-            font-size: 0.85rem;
-            color: #ccc;
         }
         
         .rating {
@@ -222,6 +209,172 @@
             z-index: 2;
         }
         
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-card i {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            color: #FFD700;
+        }
+        
+        .week-rank {
+            background: rgba(0,0,0,0.6);
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-size: 0.7rem;
+        }
+        
+        .navbar {
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #FFD700, #FF6B35);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 0.8rem;
+            color: #FF6B35;
+            display: block;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #f5f5f5;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: #FF6B35;
+        }
+        
+        .search-bar {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .search-bar input {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 25px;
+            background: #2d2d44;
+            color: white;
+        }
+        
+        .search-bar button {
+            padding: 0.5rem 1rem;
+            background: #FF6B35;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            color: white;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        footer {
+            background: #0f0f1a;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            color: #f5f5f5;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            color: #FF6B35;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid #2d2d44;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .anime-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -236,24 +389,6 @@
         .anime-card {
             animation: fadeInUp 0.6s ease forwards;
             opacity: 0;
-        }
-        
-        .anime-card:nth-child(1) { animation-delay: 0.05s; }
-        .anime-card:nth-child(2) { animation-delay: 0.1s; }
-        .anime-card:nth-child(3) { animation-delay: 0.15s; }
-        .anime-card:nth-child(4) { animation-delay: 0.2s; }
-        .anime-card:nth-child(5) { animation-delay: 0.25s; }
-        .anime-card:nth-child(6) { animation-delay: 0.3s; }
-        .anime-card:nth-child(7) { animation-delay: 0.35s; }
-        .anime-card:nth-child(8) { animation-delay: 0.4s; }
-        .anime-card:nth-child(9) { animation-delay: 0.45s; }
-        .anime-card:nth-child(10) { animation-delay: 0.5s; }
-        
-        .week-rank {
-            background: rgba(0,0,0,0.6);
-            padding: 0.2rem 0.5rem;
-            border-radius: 5px;
-            font-size: 0.7rem;
         }
     </style>
 </head>
@@ -285,7 +420,7 @@
                 </div>
                 <h1><i class="fas fa-chart-line"></i> Current Top 10 Anime</h1>
                 <p>Based on weekly rankings from Japanese polls and streaming platforms (May 2026)</p>
-                <div class="stats-bar" style="margin-top: 2rem;">
+                <div class="stats-bar">
                     <div class="stat-card">
                         <i class="fas fa-fire"></i>
                         <span> Trending Now</span>
@@ -340,224 +475,72 @@
     </footer>
 
     <script>
-        // Current Top 10 Anime Data (Spring 2026 Rankings)
-        const currentAnime = [
-            {
-                rank: 1,
-                title: "Jujutsu Kaisen",
-                year: "2020-2026",
-                rating: 9.6,
-                reviews: 234000,
-                genre: ["Action", "Supernatural", "Dark Fantasy"],
-                image: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=400",
-                description: "Curses and sorcerers collide in this action-packed supernatural thriller. Season 3 is breaking all records!",
-                episodes: 62,
-                studio: "MAPPA",
-                trend: "+45% this week",
-                watchCount: "2.3M"
-            },
-            {
-                rank: 2,
-                title: "Attack on Titan",
-                year: "2013-2026",
-                rating: 9.7,
-                reviews: 412000,
-                genre: ["Dark Fantasy", "Action", "Post-Apocalyptic"],
-                image: "https://images.unsplash.com/photo-1580428182138-9b80fa2a83b9?w=400",
-                description: "The epic conclusion continues to dominate charts worldwide. A must-watch masterpiece.",
-                episodes: 94,
-                studio: "MAPPA",
-                trend: "+32% this week",
-                watchCount: "1.9M"
-            },
-            {
-                rank: 3,
-                title: "Frieren: Beyond Journey's End",
-                year: "2023-2026",
-                rating: 9.5,
-                reviews: 178000,
-                genre: ["Fantasy", "Slice of Life", "Adventure"],
-                image: "https://images.unsplash.com/photo-1560972550-aba3456b5564?w=400",
-                description: "A heartfelt journey of an elf mage learning to understand human emotions after defeating the Demon King.",
-                episodes: 34,
-                studio: "Madhouse",
-                trend: "+28% this week",
-                watchCount: "1.6M"
-            },
-            {
-                rank: 4,
-                title: "Demon Slayer: Kimetsu no Yaiba",
-                year: "2019-2026",
-                rating: 9.6,
-                reviews: 345000,
-                genre: ["Action", "Historical", "Supernatural"],
-                image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400",
-                description: "The Infinity Castle arc is captivating audiences with stunning animation and emotional storytelling.",
-                episodes: 63,
-                studio: "ufotable",
-                trend: "+41% this week",
-                watchCount: "3.1M"
-            },
-            {
-                rank: 5,
-                title: "Oshi no Ko",
-                year: "2023-2026",
-                rating: 9.4,
-                reviews: 156000,
-                genre: ["Drama", "Supernatural", "Showbiz"],
-                image: "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=400",
-                description: "The dark side of the entertainment industry revealed through reincarnated idols and their secrets.",
-                episodes: 30,
-                studio: "Doga Kobo",
-                trend: "+25% this week",
-                watchCount: "1.4M"
-            },
-            {
-                rank: 6,
-                title: "My Hero Academia",
-                year: "2016-2026",
-                rating: 9.3,
-                reviews: 289000,
-                genre: ["Action", "Superhero", "School"],
-                image: "https://images.unsplash.com/photo-1541562232579-426a1ccf7b3c?w=400",
-                description: "The final war arc is reaching its climax with epic battles and emotional moments.",
-                episodes: 152,
-                studio: "Bones",
-                trend: "+19% this week",
-                watchCount: "1.8M"
-            },
-            {
-                rank: 7,
-                title: "Spy x Family",
-                year: "2022-2026",
-                rating: 9.2,
-                reviews: 198000,
-                genre: ["Comedy", "Action", "Slice of Life"],
-                image: "https://images.unsplash.com/photo-1569317002804-ab77bcf1bce4?w=400",
-                description: "The Forger family continues to charm audiences with their hilarious spy adventures.",
-                episodes: 50,
-                studio: "WIT Studio / CloverWorks",
-                trend: "+15% this week",
-                watchCount: "2.0M"
-            },
-            {
-                rank: 8,
-                title: "The Apothecary Diaries",
-                year: "2023-2026",
-                rating: 9.1,
-                reviews: 123000,
-                genre: ["Mystery", "Historical", "Drama"],
-                image: "https://images.unsplash.com/photo-1631175419962-a9ed1c6742bf?w=400",
-                description: "A brilliant apothecary solves mysteries in the imperial court with her unique skills.",
-                episodes: 36,
-                studio: "TOHO animation",
-                trend: "+22% this week",
-                watchCount: "1.1M"
-            },
-            {
-                rank: 9,
-                title: "Death Note",
-                year: "2006-2026 (Re-run)",
-                rating: 9.4,
-                reviews: 234000,
-                genre: ["Psychological", "Thriller", "Supernatural"],
-                image: "https://images.unsplash.com/photo-1580428182138-9b80fa2a83b9?w=400",
-                description: "The timeless classic is experiencing a massive resurgence in popularity!",
-                episodes: 37,
-                studio: "Madhouse",
-                trend: "+50% this week",
-                watchCount: "987K"
-            },
-            {
-                rank: 10,
-                title: "Fullmetal Alchemist: Brotherhood",
-                year: "2009-2026 (Re-run)",
-                rating: 9.8,
-                reviews: 345000,
-                genre: ["Action", "Adventure", "Fantasy"],
-                image: "https://images.unsplash.com/photo-1560972550-aba3456b5564?w=400",
-                description: "The perfect anime experiencing renewed love from new generation fans.",
-                episodes: 64,
-                studio: "Bones",
-                trend: "+38% this week",
-                watchCount: "876K"
-            }
+        // Current Top 10 Anime Data - Spring 2026
+        var currentAnime = [
+            { rank: 1, title: "Jujutsu Kaisen", year: "2020-2026", rating: 9.6, reviews: 234000, genre: ["Action", "Supernatural", "Dark Fantasy"], image: "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=400", description: "Curses and sorcerers collide in this action-packed supernatural thriller.", episodes: 62, studio: "MAPPA", trend: "+45% this week", watchCount: "2.3M" },
+            { rank: 2, title: "Attack on Titan", year: "2013-2026", rating: 9.7, reviews: 412000, genre: ["Dark Fantasy", "Action", "Post-Apocalyptic"], image: "https://images.unsplash.com/photo-1580428182138-9b80fa2a83b9?w=400", description: "The epic conclusion continues to dominate charts worldwide.", episodes: 94, studio: "MAPPA", trend: "+32% this week", watchCount: "1.9M" },
+            { rank: 3, title: "Frieren: Beyond Journey's End", year: "2023-2026", rating: 9.5, reviews: 178000, genre: ["Fantasy", "Slice of Life", "Adventure"], image: "https://images.unsplash.com/photo-1560972550-aba3456b5564?w=400", description: "A heartfelt journey of an elf mage learning to understand human emotions.", episodes: 34, studio: "Madhouse", trend: "+28% this week", watchCount: "1.6M" },
+            { rank: 4, title: "Demon Slayer: Kimetsu no Yaiba", year: "2019-2026", rating: 9.6, reviews: 345000, genre: ["Action", "Historical", "Supernatural"], image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400", description: "The Infinity Castle arc is captivating audiences with stunning animation.", episodes: 63, studio: "ufotable", trend: "+41% this week", watchCount: "3.1M" },
+            { rank: 5, title: "Oshi no Ko", year: "2023-2026", rating: 9.4, reviews: 156000, genre: ["Drama", "Supernatural", "Showbiz"], image: "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=400", description: "The dark side of the entertainment industry revealed.", episodes: 30, studio: "Doga Kobo", trend: "+25% this week", watchCount: "1.4M" },
+            { rank: 6, title: "My Hero Academia", year: "2016-2026", rating: 9.3, reviews: 289000, genre: ["Action", "Superhero", "School"], image: "https://images.unsplash.com/photo-1541562232579-426a1ccf7b3c?w=400", description: "The final war arc is reaching its climax with epic battles.", episodes: 152, studio: "Bones", trend: "+19% this week", watchCount: "1.8M" },
+            { rank: 7, title: "Spy x Family", year: "2022-2026", rating: 9.2, reviews: 198000, genre: ["Comedy", "Action", "Slice of Life"], image: "https://images.unsplash.com/photo-1569317002804-ab77bcf1bce4?w=400", description: "The Forger family continues to charm audiences.", episodes: 50, studio: "WIT Studio / CloverWorks", trend: "+15% this week", watchCount: "2.0M" },
+            { rank: 8, title: "The Apothecary Diaries", year: "2023-2026", rating: 9.1, reviews: 123000, genre: ["Mystery", "Historical", "Drama"], image: "https://images.unsplash.com/photo-1631175419962-a9ed1c6742bf?w=400", description: "A brilliant apothecary solves mysteries in the imperial court.", episodes: 36, studio: "TOHO animation", trend: "+22% this week", watchCount: "1.1M" },
+            { rank: 9, title: "Death Note", year: "2006-2026 (Re-run)", rating: 9.4, reviews: 234000, genre: ["Psychological", "Thriller", "Supernatural"], image: "https://images.unsplash.com/photo-1580428182138-9b80fa2a83b9?w=400", description: "The timeless classic is experiencing a massive resurgence!", episodes: 37, studio: "Madhouse", trend: "+50% this week", watchCount: "987K" },
+            { rank: 10, title: "Fullmetal Alchemist: Brotherhood", year: "2009-2026 (Re-run)", rating: 9.8, reviews: 345000, genre: ["Action", "Adventure", "Fantasy"], image: "https://images.unsplash.com/photo-1560972550-aba3456b5564?w=400", description: "The perfect anime experiencing renewed love.", episodes: 64, studio: "Bones", trend: "+38% this week", watchCount: "876K" }
         ];
 
-        function renderAnime() {
-            const container = document.getElementById('animeGrid');
-            if (!container) return;
-            
-            let html = '';
-            for (let i = 0; i < currentAnime.length; i++) {
-                const anime = currentAnime[i];
-                const ratingStars = getRatingStars(anime.rating);
-                const trendIcon = anime.trend.includes('+') ? '' : '';
-                const trendColor = anime.trend.includes('+') ? '#FF4444' : '#4CAF50';
-                
-                html += `
-                    <div class="anime-card" onclick="watchAnime('${anime.title}')">
-                        <div class="anime-poster-container">
-                            <div class="rank-badge">#${anime.rank}</div>
-                            <div class="trending-icon">
-                                <i class="fas fa-chart-line" style="color: ${trendColor}"></i> ${anime.trend}
-                            </div>
-                            <img src="${anime.image}" alt="${anime.title}" class="anime-poster" onerror="this.src='https://via.placeholder.com/400x420?text=${encodeURIComponent(anime.title)}'">
-                            <div class="play-overlay">
-                                <i class="fas fa-play"></i>
-                            </div>
-                            <div class="hot-badge">
-                                <i class="fas fa-eye"></i> ${anime.watchCount} watching
-                            </div>
-                        </div>
-                        <div class="anime-info">
-                            <div class="anime-title">
-                                <span>${anime.title}</span>
-                                <span class="week-rank"><i class="fas fa-calendar-week"></i> ${anime.year}</span>
-                            </div>
-                            <div class="rating">
-                                ${ratingStars}
-                                <span style="color: #ccc; margin-left: 5px;">(${anime.reviews.toLocaleString()} reviews)</span>
-                            </div>
-                            <div class="genre-tags">
-                                ${anime.genre.map(g => `<span class="genre-tag">${g}</span>`).join('')}
-                            </div>
-                            <p style="font-size: 0.85rem; color: #aaa; margin: 0.5rem 0;">${anime.description.substring(0, 100)}...</p>
-                            <div class="stats-row">
-                                <div class="stat-item">
-                                    <i class="fas fa-tv"></i>
-                                    <span>${anime.episodes} eps</span>
-                                </div>
-                                <div class="stat-item">
-                                    <i class="fas fa-building"></i>
-                                    <span>${anime.studio}</span>
-                                </div>
-                                <div class="stat-item">
-                                    <i class="fas ${trendIcon}" style="color: ${trendColor}"></i>
-                                    <span>Trending</span>
-                                </div>
-                            </div>
-                            <button class="watch-btn" onclick="event.stopPropagation(); watchAnime('${anime.title}')">
-                                <i class="fas fa-play"></i> Watch Now
-                            </button>
-                        </div>
-                    </div>
-                `;
-            }
-            container.innerHTML = html;
-        }
-
         function getRatingStars(rating) {
-            let stars = '';
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = (rating % 1) >= 0.5;
+            var stars = '';
+            var fullStars = Math.floor(rating);
+            var hasHalfStar = (rating % 1) >= 0.5;
             
-            for (let i = 0; i < fullStars; i++) stars += '<i class="fas fa-star"></i>';
+            for (var i = 0; i < fullStars; i++) stars += '<i class="fas fa-star"></i>';
             if (hasHalfStar) stars += '<i class="fas fa-star-half-alt"></i>';
-            const emptyStars = 5 - Math.ceil(rating);
-            for (let i = 0; i < emptyStars; i++) stars += '<i class="far fa-star"></i>';
+            var emptyStars = 5 - Math.ceil(rating);
+            for (var i = 0; i < emptyStars; i++) stars += '<i class="far fa-star"></i>';
             
             return stars;
+        }
+
+        function renderAnime(animeList) {
+            var container = document.getElementById('animeGrid');
+            if (!container) return;
+            
+            var html = '';
+            for (var i = 0; i < animeList.length; i++) {
+                var anime = animeList[i];
+                var ratingStars = getRatingStars(anime.rating);
+                var trendColor = (anime.trend.indexOf('+') !== -1) ? '#FF4444' : '#4CAF50';
+                var trendIcon = (anime.trend.indexOf('+') !== -1) ? '' : '';
+                
+                // Build genre tags
+                var genreHtml = '';
+                for (var g = 0; g < anime.genre.length; g++) {
+                    genreHtml += '<span class="genre-tag">' + anime.genre[g] + '</span>';
+                }
+                
+                html += '<div class="anime-card" onclick="watchAnime(\'' + anime.title.replace(/'/g, "\\'") + '\')">';
+                html += '<div class="anime-poster-container">';
+                html += '<div class="rank-badge">#' + anime.rank + '</div>';
+                html += '<div class="trending-icon"><i class="fas fa-chart-line" style="color: ' + trendColor + '"></i> ' + anime.trend + '</div>';
+                html += '<img src="' + anime.image + '" alt="' + anime.title + '" class="anime-poster" onerror="this.src=\'https://via.placeholder.com/400x420?text=' + encodeURIComponent(anime.title) + '\'">';
+                html += '<div class="play-overlay"><i class="fas fa-play"></i></div>';
+                html += '<div class="hot-badge"><i class="fas fa-eye"></i> ' + anime.watchCount + ' watching</div>';
+                html += '</div>';
+                html += '<div class="anime-info">';
+                html += '<div class="anime-title">' + anime.title + '</div>';
+                html += '<div class="rating">' + ratingStars + '<span style="color: #ccc; margin-left: 5px;">(' + anime.reviews.toLocaleString() + ' reviews)</span></div>';
+                html += '<div class="genre-tags">' + genreHtml + '</div>';
+                html += '<p style="font-size: 0.85rem; color: #aaa; margin: 0.5rem 0;">' + anime.description.substring(0, 100) + '...</p>';
+                html += '<div class="stats-row">';
+                html += '<div class="stat-item"><i class="fas fa-tv"></i><span>' + anime.episodes + ' eps</span></div>';
+                html += '<div class="stat-item"><i class="fas fa-building"></i><span>' + anime.studio + '</span></div>';
+                html += '<div class="stat-item"><i class="fas ' + trendIcon + '" style="color: ' + trendColor + '"></i><span>Trending</span></div>';
+                html += '</div>';
+                html += '<button class="watch-btn" onclick="event.stopPropagation(); watchAnime(\'' + anime.title.replace(/'/g, "\\'") + '\')"><i class="fas fa-play"></i> Watch Now</button>';
+                html += '</div></div>';
+            }
+            container.innerHTML = html;
         }
 
         function watchAnime(title) {
@@ -565,54 +548,39 @@
             window.location.href = 'watch.jsp';
         }
 
-        // Search functionality
+        // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
-            renderAnime();
+            renderAnime(currentAnime);
             
-            const searchInput = document.getElementById('searchInput');
+            var searchInput = document.getElementById('searchInput');
             if (searchInput) {
                 searchInput.addEventListener('input', function(e) {
-                    const query = e.target.value.toLowerCase();
-                    const filtered = currentAnime.filter(anime => 
-                        anime.title.toLowerCase().includes(query) ||
-                        anime.genre.some(g => g.toLowerCase().includes(query)) ||
-                        anime.studio.toLowerCase().includes(query)
-                    );
+                    var query = e.target.value.toLowerCase();
+                    var filtered = [];
                     
-                    const container = document.getElementById('animeGrid');
-                    if (query.length > 0) {
-                        if (filtered.length === 0) {
-                            container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 4rem;"><i class="fas fa-search" style="font-size: 3rem; color: #FF6B35;"></i><h3>No results found for "' + query + '"</h3><p>Try searching for another anime title or genre</p></div>';
-                        } else {
-                            let html = '';
-                            for (let i = 0; i < filtered.length; i++) {
-                                const anime = filtered[i];
-                                const ratingStars = getRatingStars(anime.rating);
-                                const trendIcon = anime.trend.includes('+') ? '' : '';
-                                const trendColor = anime.trend.includes('+') ? '#FF4444' : '#4CAF50';
-                                
-                                html += `
-                                    <div class="anime-card" onclick="watchAnime('${anime.title}')">
-                                        <div class="anime-poster-container">
-                                            <div class="rank-badge">#${anime.rank}</div>
-                                            <div class="trending-icon"><i class="fas fa-chart-line" style="color: ${trendColor}"></i> ${anime.trend}</div>
-                                            <img src="${anime.image}" class="anime-poster" onerror="this.src='https://via.placeholder.com/400x420?text=${encodeURIComponent(anime.title)}'">
-                                            <div class="play-overlay"><i class="fas fa-play"></i></div>
-                                            <div class="hot-badge"><i class="fas fa-eye"></i> ${anime.watchCount} watching</div>
-                                        </div>
-                                        <div class="anime-info">
-                                            <div class="anime-title"><span>${anime.title}</span><span class="week-rank"><i class="fas fa-calendar-week"></i> ${anime.year}</span></div>
-                                            <div class="rating">${ratingStars}<span style="color: #ccc;"> (${anime.reviews.toLocaleString()} reviews)</span></div>
-                                            <div class="genre-tags">${anime.genre.map(g => `<span class="genre-tag">${g}</span>`).join('')}</div>
-                                            <button class="watch-btn" onclick="event.stopPropagation(); watchAnime('${anime.title}')"><i class="fas fa-play"></i> Watch Now</button>
-                                        </div>
-                                    </div>
-                                `;
+                    for (var i = 0; i < currentAnime.length; i++) {
+                        var anime = currentAnime[i];
+                        var titleMatch = anime.title.toLowerCase().indexOf(query) !== -1;
+                        var genreMatch = false;
+                        for (var g = 0; g < anime.genre.length; g++) {
+                            if (anime.genre[g].toLowerCase().indexOf(query) !== -1) {
+                                genreMatch = true;
+                                break;
                             }
-                            container.innerHTML = html;
                         }
+                        var studioMatch = anime.studio.toLowerCase().indexOf(query) !== -1;
+                        if (titleMatch || genreMatch || studioMatch) {
+                            filtered.push(anime);
+                        }
+                    }
+                    
+                    if (query.length > 0 && filtered.length === 0) {
+                        var container = document.getElementById('animeGrid');
+                        container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 4rem;"><i class="fas fa-search" style="font-size: 3rem; color: #FF6B35;"></i><h3>No results found for "' + query + '"</h3><p>Try searching for another anime title or genre</p></div>';
+                    } else if (query.length > 0) {
+                        renderAnime(filtered);
                     } else {
-                        renderAnime();
+                        renderAnime(currentAnime);
                     }
                 });
             }
