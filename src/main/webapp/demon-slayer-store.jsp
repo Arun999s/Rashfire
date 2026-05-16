@@ -151,11 +151,15 @@
         }
         
         .discount-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
             background: #ff4444;
-            padding: 0.2rem 0.5rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.7rem;
-            margin-left: 10px;
+            font-weight: 600;
+            z-index: 1;
         }
         
         .quantity-selector {
@@ -168,20 +172,25 @@
         .quantity-selector button {
             background: var(--dark);
             border: none;
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             border-radius: 5px;
             cursor: pointer;
             color: white;
+            transition: all 0.2s;
+        }
+        
+        .quantity-selector button:hover {
+            background: var(--primary);
         }
         
         .quantity-selector input {
-            width: 50px;
+            width: 60px;
             text-align: center;
             background: var(--dark);
             border: none;
             color: white;
-            padding: 0.2rem;
+            padding: 0.3rem;
             border-radius: 5px;
         }
         
@@ -216,14 +225,19 @@
             display: flex;
             gap: 1rem;
             margin-bottom: 1rem;
-            padding: 0.5rem;
+            padding: 0.8rem;
             background: rgba(255,255,255,0.05);
             border-radius: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .cart-item:hover {
+            transform: translateX(-5px);
         }
         
         .cart-item-img {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             object-fit: cover;
             border-radius: 8px;
         }
@@ -235,17 +249,29 @@
         .cart-item-title {
             font-weight: 600;
             font-size: 0.9rem;
+            margin-bottom: 0.3rem;
         }
         
         .cart-item-price {
             color: var(--secondary);
+            font-weight: 600;
         }
         
         .cart-item-quantity {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            margin-top: 0.3rem;
+            margin-top: 0.5rem;
+        }
+        
+        .cart-item-quantity button {
+            background: var(--dark);
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
         }
         
         .cart-total {
@@ -284,12 +310,13 @@
             background: var(--primary);
             color: white;
             border-radius: 50%;
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             font-size: 0.7rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: bold;
         }
         
         @keyframes fadeInUp {
@@ -325,15 +352,19 @@
             .price-filter {
                 margin-left: 0;
             }
+            
+            .store-hero h1 {
+                font-size: 1.5rem;
+            }
         }
         
         .wishlist-btn {
             background: none;
             border: none;
-            color: #ff4444;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             transition: transform 0.2s;
+            padding: 0 5px;
         }
         
         .wishlist-btn:hover {
@@ -362,6 +393,19 @@
                 opacity: 1;
                 transform: translateX(-50%) translateY(0);
             }
+        }
+        
+        .store-badge {
+            display: inline-block;
+            background: rgba(255,215,0,0.2);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .add-to-cart:disabled {
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -506,7 +550,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Rashfire  - Demon Slayer Store | All rights reserved | Demon Slacer &copy; Koyoharu Gotouge / Shueisha, Aniplex, ufotable</p>
+            <p>&copy; 2026 Rashfire  - Demon Slayer Store | All rights reserved | Demon Slayer &copy; Koyoharu Gotouge / Shueisha, Aniplex, ufotable</p>
         </div>
     </footer>
 
@@ -743,11 +787,11 @@
             localStorage.setItem('rashfire_wishlist', JSON.stringify(wishlist));
         }
 
-        // Get stock status
+        // Get stock status with icon - FIXED: using statusClass instead of class
         function getStockStatus(stock) {
-            if (stock <= 0) return { class: 'out-of-stock', text: ' Out of Stock' };
-            if (stock < 10) return { class: 'low-stock', text: ` Only ${stock} left!` };
-            return { class: 'in-stock', text: ' In Stock' };
+            if (stock <= 0) return { statusClass: 'out-of-stock', text: ' Out of Stock', icon: 'fa-ban' };
+            if (stock < 10) return { statusClass: 'low-stock', text: ' Only ' + stock + ' left!', icon: 'fa-exclamation-triangle' };
+            return { statusClass: 'in-stock', text: ' In Stock', icon: 'fa-check-circle' };
         }
 
         // Render merchandise with real-time data
@@ -799,14 +843,16 @@
                 
                 return `
                     <div class="merch-card" data-id="${item.id}">
-                        <div class="stock-badge ${stockStatus.class}">${stockStatus.text}</div>
-                        ${item.discount > 0 ? `<div class="discount-badge">-${item.discount}%</div>` : ''}
+                        <div class="stock-badge ${stockStatus.statusClass}">
+                            <i class="fas ${stockStatus.icon}"></i> ${stockStatus.text}
+                        </div>
+                        ${item.discount > 0 ? `<div class="discount-badge"><i class="fas fa-tag"></i> -${item.discount}%</div>` : ''}
                         <img src="${item.image}" alt="${item.name}" class="merch-image">
                         <div class="merch-info">
                             <div style="display: flex; justify-content: space-between; align-items: start;">
                                 <h3 style="flex:1; font-size: 1rem;">${item.name}</h3>
-                                <button class="wishlist-btn" onclick="toggleWishlistItem(${item.id})" title="Add to wishlist">
-                                    <i class="fas fa-heart" style="color: ${isInWishlist ? '#ff4444' : '#888'}"></i>
+                                <button class="wishlist-btn" onclick="toggleWishlistItem(${item.id})" title="${isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}">
+                                    <i class="fas fa-heart" style="color: ${isInWishlist ? '#ff4444' : '#888'}; font-size: 1.3rem;"></i>
                                 </button>
                             </div>
                             <div class="rating">
@@ -817,7 +863,7 @@
                                 ${item.originalPrice > item.price ? `<span class="original-price">${item.originalPrice.toLocaleString()}</span>` : ''}
                                 <span class="merch-price">${item.price.toLocaleString()}</span>
                             </div>
-                            ${savings > 0 ? `<small style="color: #4CAF50;">Save ${savings.toLocaleString()}</small>` : ''}
+                            ${savings > 0 ? `<small style="color: #4CAF50;"><i class="fas fa-save"></i> Save ${savings.toLocaleString()}</small>` : ''}
                             
                             <div class="quantity-selector">
                                 <button onclick="changeQuantity(${item.id}, -1)"><i class="fas fa-minus"></i></button>
@@ -861,9 +907,9 @@
                 updateCartCount();
                 updateCartDisplay();
                 saveData();
-                showNotification(` ${item.name} added to cart!`, 'success');
+                showNotification(' ' + item.name + ' added to cart!', 'success');
             } else {
-                showNotification(` Not enough stock for ${item.name}`, 'error');
+                showNotification(' Not enough stock for ' + item.name, 'error');
             }
         }
 
@@ -892,51 +938,7 @@
                         <div class="cart-item-price">${item.price.toLocaleString()}</div>
                         <div class="cart-item-quantity">
                             <button onclick="updateCartQuantity(${index}, -1)">-</button>
-                            <span>${item.quantity}</span>
-                            <button onclick="updateCartQuantity(${index}, 1)">+</button>
-                            <button onclick="removeFromCart(${index})" style="margin-left: auto; background: none; border: none; color: #ff4444;">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-            
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const shipping = subtotal > 999 ? 0 : 99;
-            const total = subtotal + shipping;
-            
-            document.getElementById('cartSubtotal').innerText = subtotal.toLocaleString();
-            document.getElementById('shippingCost').innerText = shipping === 0 ? 'Free' : `${shipping}`;
-            document.getElementById('cartTotal').innerText = total.toLocaleString();
-        }
-
-        function updateCartQuantity(index, delta) {
-            const newQty = cart[index].quantity + delta;
-            const item = merchandise.find(m => m.id === cart[index].id);
-            
-            if (newQty > 0 && newQty <= item.stock) {
-                cart[index].quantity = newQty;
-                updateCartCount();
-                updateCartDisplay();
-                saveData();
-            } else if (newQty > item.stock) {
-                showNotification(`Only ${item.stock} items available!`, 'error');
-            } else if (newQty === 0) {
-                removeFromCart(index);
-            }
-        }
-
-        function removeFromCart(index) {
-            const removedItem = cart[index];
-            cart.splice(index, 1);
-            updateCartCount();
-            updateCartDisplay();
-            saveData();
-            showNotification(` Removed from cart`, 'info');
-        }
-
-        function clearCart() {<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+                            <span>${item.quantity}</span<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1089,11 +1091,15 @@
         }
         
         .discount-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
             background: #ff4444;
-            padding: 0.2rem 0.5rem;
+            padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.7rem;
-            margin-left: 10px;
+            font-weight: 600;
+            z-index: 1;
         }
         
         .quantity-selector {
@@ -1106,20 +1112,25 @@
         .quantity-selector button {
             background: var(--dark);
             border: none;
-            width: 25px;
-            height: 25px;
+            width: 30px;
+            height: 30px;
             border-radius: 5px;
             cursor: pointer;
             color: white;
+            transition: all 0.2s;
+        }
+        
+        .quantity-selector button:hover {
+            background: var(--primary);
         }
         
         .quantity-selector input {
-            width: 50px;
+            width: 60px;
             text-align: center;
             background: var(--dark);
             border: none;
             color: white;
-            padding: 0.2rem;
+            padding: 0.3rem;
             border-radius: 5px;
         }
         
@@ -1154,14 +1165,19 @@
             display: flex;
             gap: 1rem;
             margin-bottom: 1rem;
-            padding: 0.5rem;
+            padding: 0.8rem;
             background: rgba(255,255,255,0.05);
             border-radius: 10px;
+            transition: transform 0.2s;
+        }
+        
+        .cart-item:hover {
+            transform: translateX(-5px);
         }
         
         .cart-item-img {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             object-fit: cover;
             border-radius: 8px;
         }
@@ -1173,17 +1189,29 @@
         .cart-item-title {
             font-weight: 600;
             font-size: 0.9rem;
+            margin-bottom: 0.3rem;
         }
         
         .cart-item-price {
             color: var(--secondary);
+            font-weight: 600;
         }
         
         .cart-item-quantity {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            margin-top: 0.3rem;
+            margin-top: 0.5rem;
+        }
+        
+        .cart-item-quantity button {
+            background: var(--dark);
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
         }
         
         .cart-total {
@@ -1222,12 +1250,13 @@
             background: var(--primary);
             color: white;
             border-radius: 50%;
-            width: 18px;
-            height: 18px;
+            width: 20px;
+            height: 20px;
             font-size: 0.7rem;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: bold;
         }
         
         @keyframes fadeInUp {
@@ -1263,15 +1292,19 @@
             .price-filter {
                 margin-left: 0;
             }
+            
+            .store-hero h1 {
+                font-size: 1.5rem;
+            }
         }
         
         .wishlist-btn {
             background: none;
             border: none;
-            color: #ff4444;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             transition: transform 0.2s;
+            padding: 0 5px;
         }
         
         .wishlist-btn:hover {
@@ -1300,6 +1333,19 @@
                 opacity: 1;
                 transform: translateX(-50%) translateY(0);
             }
+        }
+        
+        .store-badge {
+            display: inline-block;
+            background: rgba(255,215,0,0.2);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .add-to-cart:disabled {
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -1444,7 +1490,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Rashfire  - Demon Slayer Store | All rights reserved | Demon Slacer &copy; Koyoharu Gotouge / Shueisha, Aniplex, ufotable</p>
+            <p>&copy; 2026 Rashfire  - Demon Slayer Store | All rights reserved | Demon Slayer &copy; Koyoharu Gotouge / Shueisha, Aniplex, ufotable</p>
         </div>
     </footer>
 
@@ -1681,11 +1727,11 @@
             localStorage.setItem('rashfire_wishlist', JSON.stringify(wishlist));
         }
 
-        // Get stock status
+        // Get stock status with icon - FIXED: using statusClass instead of class
         function getStockStatus(stock) {
-            if (stock <= 0) return { class: 'out-of-stock', text: ' Out of Stock' };
-            if (stock < 10) return { class: 'low-stock', text: ` Only ${stock} left!` };
-            return { class: 'in-stock', text: ' In Stock' };
+            if (stock <= 0) return { statusClass: 'out-of-stock', text: ' Out of Stock', icon: 'fa-ban' };
+            if (stock < 10) return { statusClass: 'low-stock', text: ' Only ' + stock + ' left!', icon: 'fa-exclamation-triangle' };
+            return { statusClass: 'in-stock', text: ' In Stock', icon: 'fa-check-circle' };
         }
 
         // Render merchandise with real-time data
@@ -1737,14 +1783,16 @@
                 
                 return `
                     <div class="merch-card" data-id="${item.id}">
-                        <div class="stock-badge ${stockStatus.class}">${stockStatus.text}</div>
-                        ${item.discount > 0 ? `<div class="discount-badge">-${item.discount}%</div>` : ''}
+                        <div class="stock-badge ${stockStatus.statusClass}">
+                            <i class="fas ${stockStatus.icon}"></i> ${stockStatus.text}
+                        </div>
+                        ${item.discount > 0 ? `<div class="discount-badge"><i class="fas fa-tag"></i> -${item.discount}%</div>` : ''}
                         <img src="${item.image}" alt="${item.name}" class="merch-image">
                         <div class="merch-info">
                             <div style="display: flex; justify-content: space-between; align-items: start;">
                                 <h3 style="flex:1; font-size: 1rem;">${item.name}</h3>
-                                <button class="wishlist-btn" onclick="toggleWishlistItem(${item.id})" title="Add to wishlist">
-                                    <i class="fas fa-heart" style="color: ${isInWishlist ? '#ff4444' : '#888'}"></i>
+                                <button class="wishlist-btn" onclick="toggleWishlistItem(${item.id})" title="${isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}">
+                                    <i class="fas fa-heart" style="color: ${isInWishlist ? '#ff4444' : '#888'}; font-size: 1.3rem;"></i>
                                 </button>
                             </div>
                             <div class="rating">
@@ -1755,7 +1803,7 @@
                                 ${item.originalPrice > item.price ? `<span class="original-price">${item.originalPrice.toLocaleString()}</span>` : ''}
                                 <span class="merch-price">${item.price.toLocaleString()}</span>
                             </div>
-                            ${savings > 0 ? `<small style="color: #4CAF50;">Save ${savings.toLocaleString()}</small>` : ''}
+                            ${savings > 0 ? `<small style="color: #4CAF50;"><i class="fas fa-save"></i> Save ${savings.toLocaleString()}</small>` : ''}
                             
                             <div class="quantity-selector">
                                 <button onclick="changeQuantity(${item.id}, -1)"><i class="fas fa-minus"></i></button>
@@ -1799,9 +1847,9 @@
                 updateCartCount();
                 updateCartDisplay();
                 saveData();
-                showNotification(` ${item.name} added to cart!`, 'success');
+                showNotification(' ' + item.name + ' added to cart!', 'success');
             } else {
-                showNotification(` Not enough stock for ${item.name}`, 'error');
+                showNotification(' Not enough stock for ' + item.name, 'error');
             }
         }
 
@@ -1830,48 +1878,4 @@
                         <div class="cart-item-price">${item.price.toLocaleString()}</div>
                         <div class="cart-item-quantity">
                             <button onclick="updateCartQuantity(${index}, -1)">-</button>
-                            <span>${item.quantity}</span>
-                            <button onclick="updateCartQuantity(${index}, 1)">+</button>
-                            <button onclick="removeFromCart(${index})" style="margin-left: auto; background: none; border: none; color: #ff4444;">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-            
-            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const shipping = subtotal > 999 ? 0 : 99;
-            const total = subtotal + shipping;
-            
-            document.getElementById('cartSubtotal').innerText = subtotal.toLocaleString();
-            document.getElementById('shippingCost').innerText = shipping === 0 ? 'Free' : `${shipping}`;
-            document.getElementById('cartTotal').innerText = total.toLocaleString();
-        }
-
-        function updateCartQuantity(index, delta) {
-            const newQty = cart[index].quantity + delta;
-            const item = merchandise.find(m => m.id === cart[index].id);
-            
-            if (newQty > 0 && newQty <= item.stock) {
-                cart[index].quantity = newQty;
-                updateCartCount();
-                updateCartDisplay();
-                saveData();
-            } else if (newQty > item.stock) {
-                showNotification(`Only ${item.stock} items available!`, 'error');
-            } else if (newQty === 0) {
-                removeFromCart(index);
-            }
-        }
-
-        function removeFromCart(index) {
-            const removedItem = cart[index];
-            cart.splice(index, 1);
-            updateCartCount();
-            updateCartDisplay();
-            saveData();
-            showNotification(` Removed from cart`, 'info');
-        }
-
-        function clearCart() {
+                            <span>${item.quantity}</span
